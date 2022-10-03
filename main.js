@@ -1,12 +1,14 @@
 movie = image();
 movie.source = "blank-transparent-square.jpg";
 //movie source is 1k by 1k pixels for perfect grid
+
 var map = [["#","#","#","#","#"],
            ["#","$","#","$","#"],
            ["#","#","#","#","#"],
            ["#","$","#","$","#"],
            ["#","#","#","#","#"]];
 //gridmap using arrays within arrays
+
 var scale = movie.height/map.length;
 //map tile size
 var scaley = 0;
@@ -15,6 +17,14 @@ var scalex = 0;
 //x increment
 var squares = []
 //where square sides are stored
+var pi = Math.PI
+var fov = pi/3
+var half_fov = fov/2
+var player_angle = pi
+//pi variables
+var playerx = (movie.width/2)
+var playery = (movie.height/2)
+
 for(var m in map)
 {
 for(var n in map[m])
@@ -43,57 +53,33 @@ scalex = 0;
 scaley += scale;
 //increments scalex and scaley with scale
 }
-var player = circle(500,500,25,"red","clear");
+
+var player = circle(playerx,playery,25,"red","clear");
 //player circle
 var scen = graphic("blank-transparent-square.jpg-2");
 //invisible box over screen to use to move player because it doesnt work without it
-var ray = line(player.x,player.y,player.x,0,"blue",5);
-//player's line of sight
+var direction = line(playerx, playery,(playerx + Math.sin(player_angle)*50), (playery - Math.cos(player_angle)*50), "#0000FF", 10)
+
 scen.whenKeyDown = function(key)
 {
 if(key === 'a')
 {
-if(ray.x2 >= 0 && ray.y2 <= 0)
-{
-ray.x2 -= 10;
-}
-if(ray.y2 >= 0 && ray.y2 <= 1000 && ray.x2 <= 0)
-{
-ray.y2 += 10;
-}
-if(ray.x2 <= 1000 && ray.y2 >= 1000)
-{
-ray.x2 += 10;
-}
-if(ray.x2 >= 1000 && ray.y2 <= 1000)
-{
-ray.y2 -= 10;
-}
-//keys a and d which work inversly to eachother rotation the line
+player_angle -= 0.1
+log(player_angle+"left")
+log(direction.x2+"x2")
+log(direction.y2+"y2")
 }
 if(key === 'd')
 {
-if(ray.x2 >= 0 && ray.y2 <= 0)
-{
-ray.x2 += 10;
-}
-if(ray.y2 >= 0 && ray.y2 <= 1000 && ray.x2 <= 0)
-{
-ray.y2 -= 10;
-}
-if(ray.x2 <= 1000 && ray.y2 >= 1000)
-{
-ray.x2 -= 10;
-}
-if(ray.x2 >= 1000 && ray.y2 <= 1000)
-{
-ray.y2 += 10;
+player_angle += 0.1
+log(player_angle+"Right")
+log(direction.x2+"x2")
+log(direction.y2+"y2")
 }
 }
-}
+
 repeat(function()
 {
-ray.x1 = player.x;
-ray.y1 = player.y;
-//player line cent
+direction.x2 = playerx + Math.sin(player_angle)*50
+direction.y2 = playery + Math.sin(player_angle)*50
 }, 1);
