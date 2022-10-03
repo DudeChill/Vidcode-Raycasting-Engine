@@ -59,6 +59,9 @@ var player = circle(playerx,playery,25,"red","clear");
 var scen = graphic("blank-transparent-square.jpg-2");
 //invisible box over screen to use to move player because it doesnt work without it
 var direction = line(playerx, playery,(playerx + Math.sin(player_angle)*50), (playery - Math.cos(player_angle)*50), "#0000FF", 10)
+var left_line = line(playerx, playery,(playerx + Math.sin(player_angle-fov)*50), (playery - Math.cos(player_angle-fov)*50), "#0000FF", 10)
+var right_line = line(playerx, playery,(playerx + Math.sin(player_angle+fov)*50), (playery - Math.cos(player_angle+fov)*50), "#0000FF", 10)
+//Lines to show the player's fov
 
 scen.whenKeyDown = function(key)
 {
