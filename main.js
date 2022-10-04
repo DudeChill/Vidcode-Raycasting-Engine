@@ -54,7 +54,7 @@ scaley += scale;
 //increments scalex and scaley with scale
 }
 
-var player = circle(playerx,playery,25,"red","clear");
+var player = circle(movie.width/2,movie.height/2,25,"red","clear");
 //player circle
 var scen = graphic("blank-transparent-square.jpg-2");
 //invisible box over screen to use to move player because it doesnt work without it
@@ -68,16 +68,10 @@ scen.whenKeyDown = function(key)
 if(key === 'a')
 {
 player_angle -= 0.1
-log(player_angle+"left")
-log(direction.x2+"x2")
-log(direction.y2+"y2")
 }
 if(key === 'd')
 {
 player_angle += 0.1
-log(player_angle+"Right")
-log(direction.x2+"x2")
-log(direction.y2+"y2")
 }
 }
 
@@ -85,4 +79,10 @@ repeat(function()
 {
 direction.x2 = playerx + Math.sin(player_angle)*50
 direction.y2 = playery + Math.sin(player_angle)*50
+
+left_line.x2 = playerx + Math.sin(player_angle-fov)*50
+left_line.y2 = playery + Math.cos(player_angle-fov)*50
+  
+right_line.x2 = playerx + Math.sin(player_angle+fov)*50
+right_line.y2 = playery + Math.cos(player_angle+fov)*50
 }, 1);
