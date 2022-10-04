@@ -11,7 +11,7 @@ var map = [["#","#","#","#","#"],
 
 var scale = movie.height/map.length;
 //map tile size
-var max_depth = movie.height;
+var max_depth = 500//movie.height;
 var scaley = 0;
 //y increment
 var scalex = 0;
@@ -58,6 +58,7 @@ scalex = 0;
 scaley += scale;
 //increments scalex and scaley with scale
 }
+
 var leg = 100;
 var player = circle(movie.width/2,movie.height/2,25,"red","clear");
 //player circle
@@ -67,18 +68,6 @@ var direction = line(playerx, playery, playerx + Math.sin(player_angle)*leg, pla
 var left_line = line(playerx, playery, playerx + Math.sin(player_angle-half_fov)*leg , playery + Math.cos(player_angle-half_fov)*leg, "#0000FF", 10);
 var right_line = line(playerx, playery, playerx + Math.sin(player_angle+half_fov)*leg , playery + Math.cos(player_angle+half_fov)*leg , "#0000FF", 10);
 //Lines to show the player's fov
-
-scen.whenKeyDown = function(key)
-{
-if(key === 'a')
-{
-player_angle += 0.1
-}
-if(key === 'd')
-{
-player_angle -= 0.1
-}
-}
 
 function ray_cast()
 {
@@ -91,8 +80,20 @@ var targetx = playerx - Math.sin(start_angle) * depth;
 var targety = playery + Math.cos(start_angle) * depth;
 var lin = line(playerx, playery, targetx, targety, "#DDFF00", 10);
 }
-}
 start_angle += step_angle;
+}
+}
+
+scen.whenKeyDown = function(key)
+{
+if(key === 'a')
+{
+player_angle += 0.1
+}
+if(key === 'd')
+{
+player_angle -= 0.1
+}
 }
 
 repeat(function()
