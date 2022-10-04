@@ -63,9 +63,9 @@ var player = circle(movie.width/2,movie.height/2,25,"red","clear");
 //player circle
 var scen = graphic("blank-transparent-square.jpg-2");
 //invisible box over screen to use to move player because it doesnt work without it
-var direction = line(playerx, playery, 1, 1, "#0000FF", 10)
-var left_line = line(playerx, playery, 1, 1, "#0000FF", 10)
-var right_line = line(playerx, playery, 1, 1, "#0000FF", 10)
+var direction = line(playerx, playery, playerx + Math.sin(player_angle)*leg, playery + Math.cos(player_angle)*leg , "#0000FF", 10)
+var left_line = line(playerx, playery, playerx + Math.sin(player_angle-half_fov)*leg , playery + Math.cos(player_angle-half_fov)*leg, "#0000FF", 10)
+var right_line = line(playerx, playery, playerx + Math.sin(player_angle+half_fov)*leg , playery + Math.cos(player_angle+half_fov)*leg , "#0000FF", 10)
 //Lines to show the player's fov
 
 scen.whenKeyDown = function(key)
