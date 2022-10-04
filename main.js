@@ -11,6 +11,7 @@ var map = [["#","#","#","#","#"],
 
 var scale = movie.height/map.length;
 //map tile size
+var max_depth = 5
 var scaley = 0;
 //y increment
 var scalex = 0;
@@ -24,6 +25,10 @@ var player_angle = pi
 //pi variables
 var playerx = (movie.width/2)
 var playery = (movie.height/2)
+var rays = 5
+//rays casted for fov
+var step_angle = fov/rays
+//step which the ray makes
 
 for(var m in map)
 {
@@ -75,6 +80,20 @@ player_angle += 0.1
 }
 }
 
+function ray_cast()
+{
+var start_angle = player_angle - half_fov
+for (var i = 0; i <= rays; i++)
+{
+for (var o = 0; o <= max_depth; o++)
+{
+var targetx = playerx - Math.sin(start_angle) * o
+var targety = playery + Math.cos(start_angle) * o
+
+var lin = line(playerx, playery, targetx, targety, "#DDFF00", 10)
+}
+}
+
 repeat(function()
 {
 direction.x2 = playerx + Math.sin(player_angle)*leg
@@ -85,4 +104,5 @@ left_line.y2 = playery + Math.cos(player_angle-half_fov)*leg
   
 right_line.x2 = playerx + Math.sin(player_angle+half_fov)*leg
 right_line.y2 = playery + Math.cos(player_angle+half_fov)*leg
+ray_cast()
 }, 1);
