@@ -54,20 +54,13 @@ scaley += scale;
 //increments scalex and scaley with scale
 }
 var leg = 500
-var dx2 = playerx + Math.sin(player_angle)*50
-var dy2 = playery - Math.cos(player_angle)*50
-var llx2 = playerx + Math.sin(player_angle-fov)*50
-var lly2 = playery - Math.cos(player_angle-fov)*50
-var rlx2 = playerx + Math.sin(player_angle+fov)*50
-var rly2 = playery - Math.cos(player_angle+fov)*50
-//x2 and y2 coordinates as variables
 var player = circle(movie.width/2,movie.height/2,25,"red","clear");
 //player circle
 var scen = graphic("blank-transparent-square.jpg-2");
 //invisible box over screen to use to move player because it doesnt work without it
-var direction = line(playerx, playery, dx2, dy2, "#0000FF", 10)
-var left_line = line(playerx, playery, llx2, lly2, "#0000FF", 10)
-var right_line = line(playerx, playery, rlx2, rly2, "#0000FF", 10)
+var direction = line(playerx, playery, 1, 1, "#0000FF", 10)
+var left_line = line(playerx, playery, 1, 1, "#0000FF", 10)
+var right_line = line(playerx, playery, 1, 1, "#0000FF", 10)
 //Lines to show the player's fov
 
 scen.whenKeyDown = function(key)
