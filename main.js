@@ -53,6 +53,7 @@ scalex = 0;
 scaley += scale;
 //increments scalex and scaley with scale
 }
+var leg = 500
 var dx2 = playerx + Math.sin(player_angle)*50
 var dy2 = playery - Math.cos(player_angle)*50
 var llx2 = playerx + Math.sin(player_angle-fov)*50
@@ -83,12 +84,12 @@ player_angle += 0.1
 
 repeat(function()
 {
-direction.x2 = playerx + Math.sin(player_angle)*50
-direction.y2 = playery + Math.sin(player_angle)*50
+direction.x2 = playerx + Math.sin(player_angle)*leg
+direction.y2 = playery + Math.sin(player_angle)*leg
 
-left_line.x2 = playerx + Math.sin(player_angle-fov)*50
-left_line.y2 = playery + Math.cos(player_angle-fov)*50
+left_line.x2 = playerx + Math.sin(player_angle-half_fov)*leg
+left_line.y2 = playery + Math.cos(player_angle-half_fov)*leg
   
-right_line.x2 = playerx + Math.sin(player_angle+fov)*50
-right_line.y2 = playery + Math.cos(player_angle+fov)*50
+right_line.x2 = playerx + Math.sin(player_angle+half_fov)*leg
+right_line.y2 = playery + Math.cos(player_angle+half_fov)*leg
 }, 1);
